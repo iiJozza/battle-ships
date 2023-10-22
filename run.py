@@ -1,6 +1,7 @@
 import random
 import time
 
+
 class BattleshipGame:
     def __init__(self, grid_size, num_of_ships):
         """
@@ -31,12 +32,11 @@ class BattleshipGame:
 
     def print_board(self, hide_computer_ships=True):
         """
-        Prints the game boards for both player and computer, while hiding the computer's ships.
+        Prints the game boards, while hiding the computer's ships.
         """
         print("The Player's Board:")
 
-        print("    " + " ".join(chr(65 + i) for i in range(self.grid_size))
-        )
+        print("    " + " ".join(chr(65 + i) for i in range(self.grid_size)))
         print("  +" + " -" * self.grid_size + " +")
 
         for i, row in enumerate(self.player_board):
@@ -54,8 +54,7 @@ class BattleshipGame:
         else:
             computer_board_to_display = self.computer_board
 
-        print("    " + " ".join(chr(65 + i) for i in range(self.grid_size))
-        )
+        print("    " + " ".join(chr(65 + i) for i in range(self.grid_size)))
         print("  +" + " -" * self.grid_size + " +")
 
         for i, row in enumerate(computer_board_to_display):
@@ -80,7 +79,7 @@ class BattleshipGame:
 
     def player_guess(self, row, col):
         """
-        Handles player's guesses, showing hit or miss messages and indicating if all the computer's ships are sunk.
+        Handles player's guesses, hits and misses.
         """
         # Failsafe if the user picked the same space
         if self.computer_board[row][col] in ["M"]:
@@ -92,9 +91,9 @@ class BattleshipGame:
             print("That is a hit!")
             self.computer_ships_remaining -= 1
             if self.computer_ships_remaining == 0:
-                print("Congratulations!!! You have just sunk all of the computer's ships.")
+                print("Congratulations!!!")
             else:
-                print(f"The computer has only {self.computer_ships_remaining} more ships to sink")
+                print(f"There're {self.computer_ships_remaining} ships left")
             self.computer_board[row][col] = "X"
             time.sleep(2)
         # Checks if the player missed
@@ -114,16 +113,16 @@ class BattleshipGame:
             if self.player_board[row][col] not in ["X", "M"]:
                 break
         if self.player_board[row][col] == "0":
-            print(f"Computer has hit your ship at ({chr(65 + col)}, {row + 1})")
+            print(f"Computer hit your ship at ({chr(65 + col)}, {row + 1})")
             self.player_ships_remaining -= 1
             if self.player_ships_remaining == 0:
-                print("Oh no! The computer sank all your ships. Better luck next time!")
+                print("Oh no! The computer sank all your ships!")
             else:
-                print(f"The computer has only {self.player_ships_remaining} more ships to sink")
+                print(f"You've got {self.player_ships_remaining}ships left")
             self.player_board[row][col] = "X"
             time.sleep(2)
         else:
-            print(f"Computer has missed your ship at ({chr(65 + col)}, {row + 1})")
+            print(f"Computer has missed! ({chr(65 + col)}, {row + 1})")
             self.player_board[row][col] = "M"
             time.sleep(2)
 
@@ -136,8 +135,8 @@ class BattleshipGame:
 
             while True:
                 try:
-                    guess_row = input(f"Guess a row (A-{chr(64 + self.grid_size)}): ").upper()
-                    guess_col = int(input(f"Guess a column (1-{self.grid_size}): "))
+                    guess_row = input(f"Row? (A-{chr(64 + self.grid_size)}): ").upper()
+                    guess_col = int(input(f"Column? (1-{self.grid_size}): "))
 
                     if (
                         ord(guess_row) < 65
@@ -151,7 +150,7 @@ class BattleshipGame:
                     if self.player_guess(ord(guess_row) - 65, guess_col - 1):
                         break
                 except ValueError:
-                    print("Please enter a valid letter and number combination (e.g., A1)")
+                    print("Enter a valid combination (e.g., A + 1)")
 
             if not any("0" in row for row in self.computer_board):
                 break
@@ -163,16 +162,16 @@ class BattleshipGame:
                 break
 
 # Starting page before game start with introduction and rules
+
+
 if __name__ == "__main__":
-    print("===============================================================================================================")
-    print("                                      Welcome to Battleship!")
-    print("===============================================================================================================")
+    print("==================================================================")
+    print("                     Welcome to Battleship!")
+    print("==================================================================")
     print("""
     Welcome to a thrilling game of Battleship with a twist! In this version,
-    the playing field features only 1x1 ships, creating an intense and strategic challenge.
-    Your task is to outsmart your opponent and sink their tiny, elusive ships while protecting your own.
-    Precision and tactics are the name of the game in this compact naval battle. Are you ready to test
-    your skills and emerge victorious in this micro-sized maritime showdown?
+    the playing field features only 1x1 ships, creating an intense and
+    strategic challenge.
 
     What the symbols mean:
     ·  = Symbolizes that this coordinate hasn't been shot at
@@ -181,22 +180,17 @@ if __name__ == "__main__":
     0  = Symbolizes where your ships are located.
 
     How to play:
-    1. Whenever you feel you want to play a new game, restart the current one, or have just finished playing, press the
-    big button called "Run Program."
-    2. Type in the terminal how large you want your square grid to be. If you type 6, it will produce a 6x6 grid.
-    3. Type in how many ships you want to play with. These ships will be scattered around the grid randomly.
-    4. You are now presented with 2 different game boards. The one on top is where your ships are located, and keeps
-    track of where the computer has aimed their shots, and the bottom one is the grid for the computer and keeps track of
-    where you have aimed your shots.
-    5. Type in the terminal what row you want to aim at and afterwards what column. E.g., type in 1 in the row and later
-    A in the column to shoot at the A1 coordinate.
-    6. You will be presented with either an X, which means you have hit a ship, or M, which symbolizes that you missed.
+    1. Start the game by pressing the "run program" button
+    2. Type your prefered size grid. E.g typing a 6 will make the grid 6x6
+    3. Type your prefered ship amount, ships will scatter the grid randomly
+    4. The top grid is yours and the bottom grid is your opponents
+    5. Typing a coordinate (A, 3) shots the corresponding tile on your opponent
+    6. The com and the user alternates turns until a winner is crowned.
     7. The aim of the game is to sink every ship of your opponent.
     8. And, most importantly, have fun!
-    """
-    )
+    """)
 
-    # Collects user input for grid size and the number of ships to set up the game.
+    # User input for grid size and the number of ships to set up the game.
     while True:
         while True:
             try:
@@ -212,13 +206,13 @@ if __name__ == "__main__":
             try:
                 num_of_ships = int(input("Enter the number of ships: "))
                 if num_of_ships <= 0 or num_of_ships > size * size:
-                    print("Number of ships should be greater than 0 and not exceed grid capacity.")
+                    print("Ship amount entered is invalid")
                     continue
                 game = BattleshipGame(size, num_of_ships)
                 break
             except ValueError as e:
                 if "Number of ships can't exceed the grid size" in str(e):
-                    print("You have entered more ships than the grid can accommodate!")
+                    print("You've entered more ships than the grid can handle")
                 else:
                     print("Please enter a valid number")
 
