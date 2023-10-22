@@ -135,8 +135,8 @@ class BattleshipGame:
 
             while True:
                 try:
-                    guess_row = input(f"Row? (A-{chr(64 + self.grid_size)}): ").upper()
-                    guess_col = int(input(f"Column? (1-{self.grid_size}): "))
+                    guess_row = input(f"Guess a row (A-{chr(64 + self.grid_size)}): ").upper()
+                    guess_col = int(input(f"Guess a column (1-{self.grid_size}): "))
 
                     if (
                         ord(guess_row) < 65
