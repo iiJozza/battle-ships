@@ -1,16 +1,31 @@
 import random
 
-def create_grid(size):
-    if size < 1 or size > 9:
-        raise ValueError("Grid size must be between 1 and 9")
 
-    grid = [["·"] * size for _ in range(size)]
+class BattleshipGame:
+    def __init__(self, grid_size, num_of_ships):
 
-    return grid
+        
+        self.grid_size = grid_size
+        self.num_of_ships = num_of_ships
 
-def print_grid(grid):
-    for row in grid:
-        print(" ".join(row))
+        def print_board(self, hide_computer_ships=True):
+                """
+                Prints the game boards for both player and computer, while hiding the computer's ships.
+                """
+                # Print the player's board
+                print("The Player's Board:")
+
+                # Printing column letters and lines (top)
+                print("    " + " ".join(chr(65 + i) for i in range(self.grid_size)))
+                print("  +" + " -" * self.grid_size + " +")
+
+                # Printing rows with numbers(sides)
+                for i, row in enumerate(self.player_board):
+                    print(f"{i + 1} | " + " ".join(row) + " |")
+
+                # Printing column lines (bottom)
+                print("  +" + " -" * self.grid_size + " +")
+
 
 if __name__ == "__main__":
     while True:
