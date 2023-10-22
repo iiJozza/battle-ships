@@ -1,7 +1,6 @@
 import random
 import time
 
-
 class BattleshipGame:
     def __init__(self, grid_size, num_of_ships):
         self.grid_size = grid_size
@@ -90,14 +89,17 @@ class BattleshipGame:
         if self.player_board[row][col] == "0":
             print(f"Computer has hit your ship at ({row}, {col})")
             self.player_ships_remaining -= 1
-            print(f"The computer has only {self.player_ships_remaining} more ships to sink")
+            if self.player_ships_remaining == 0:
+                print("Oh no! The computer sank all your ships. Better luck next time")
+            else:
+                print(f"The computer has only {self.player_ships_remaining} more ships to sink")
             self.player_board[row][col] = "X"  # Update with "0" for hit
             time.sleep(2)
         else:
             print(f"Computer has missed your ship at ({row}, {col})")
             self.player_board[row][col] = "M"
             time.sleep(2)
-
+        
     def play(self):
         while True:
             self.print_board()
