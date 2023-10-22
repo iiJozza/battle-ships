@@ -14,20 +14,23 @@ def print_grid(grid):
 
 if __name__ == "__main__":
     while True:
-        try:
-            size = int(input("Enter the grid size (1-9): "))
-            grid = create_grid(size)
-            print_grid(grid)
-            break
-        except ValueError:
-            print("Please enter a valid number for the grid size.")
+        while True:
+            try:
+                size = int(input("Enter the grid size: "))
+                if size <= 0:   # check if the size is valid
+                    print( "Grid size should be greater than 0.")
+                    continue
+                break
+            except ValueError:
+                print("Please enter a number")
 
-    while True:
+        while True:
             try:
                 num_of_ships = int(input("Enter the number of ships: "))
                 if num_of_ships <= 0 or num_of_ships > size*size:   # check if the number of ships is valid
                     print("Number of ships should be greater than 0 and not exceed grid capacity.")
                     continue
+                game = BattleshipGame(size, num_of_ships)
                 break
             except ValueError as e:
                 if "Number of ships can't exceed the grid size" in str(e):
