@@ -21,3 +21,16 @@ if __name__ == "__main__":
             break
         except ValueError:
             print("Please enter a valid number for the grid size.")
+
+    while True:
+            try:
+                num_of_ships = int(input("Enter the number of ships: "))
+                if num_of_ships <= 0 or num_of_ships > size*size:   # check if the number of ships is valid
+                    print("Number of ships should be greater than 0 and not exceed grid capacity.")
+                    continue
+                break
+            except ValueError as e:
+                if "Number of ships can't exceed the grid size" in str(e):
+                    print("You have entered more ships than the grid!")
+                else:
+                    print("Please enter a number")
