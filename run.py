@@ -1,4 +1,3 @@
-
 import random
 import time
 
@@ -83,24 +82,22 @@ class BattleshipGame:
         """
         Handles player's guesses, showing hit or miss messages and indicating if all the computer's ships are sunk.
         """
-
-        #Failsafe if user picked the same space
+        # Failsafe if the user picked the same space
         if self.computer_board[row][col] in ["M"]:
             print("You already guessed that spot, try again")
             return False
 
-        #Checks if the player hits a ship, and if the player won
+        # Checks if the player hits a ship, and if the player won
         if self.computer_board[row][col] == "0":
             print("That is a hit!")
             self.computer_ships_remaining -= 1
             if self.computer_ships_remaining == 0:
                 print("Congratulations!!! You have just sunk all of the computer's ships.")
             else:
-                print(f"The computer has only {self.player_ships_remaining} more ships to sink")
+                print(f"The computer has only {self.computer_ships_remaining} more ships to sink")
             self.computer_board[row][col] = "X"
             time.sleep(2)
-
-        #Checks if the player missed
+        # Checks if the player missed
         else:
             print("Missed! Better luck next time.")
             self.computer_board[row][col] = "M"
@@ -139,22 +136,22 @@ class BattleshipGame:
 
             while True:
                 try:
-                    guess_row = int(input(f"Guess a row (1-{self.grid_size}): "))
-                    guess_col = input(f"Guess a column (A-{chr(64 + self.grid_size)}): ").upper()
+                    guess_row = input(f"Guess a row (A-{chr(64 + self.grid_size)}): ").upper()
+                    guess_col = int(input(f"Guess a column (1-{self.grid_size}): "))
 
                     if (
-                        guess_row < 1
-                        or guess_row > self.grid_size
-                        or ord(guess_col) < 65
-                        or ord(guess_col) > (65 + self.grid_size - 1)
+                        ord(guess_row) < 65
+                        or ord(guess_row) > (65 + self.grid_size - 1)
+                        or guess_col < 1
+                        or guess_col > self.grid_size
                     ):
                         print("That's outside the grid")
                         continue
 
-                    if self.player_guess(guess_row - 1, ord(guess_col) - 65):
+                    if self.player_guess(ord(guess_row) - 65, guess_col - 1):
                         break
                 except ValueError:
-                    print("Please enter a valid number and letter combination (e.g., 1 A)")
+                    print("Please enter a valid letter and number combination (e.g., A1)")
 
             if not any("0" in row for row in self.computer_board):
                 break
