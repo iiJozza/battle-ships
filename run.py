@@ -1,3 +1,4 @@
+
 import random
 import time
 
@@ -5,7 +6,11 @@ class BattleshipGame:
     def __init__(self, grid_size, num_of_ships):
         """
         Initializes game parameters and boards, placing ships randomly.
+        The maximum grid size is 9x9.
         """
+        if grid_size < 1 or grid_size > 9:
+            raise ValueError("Grid size must be between 1 and 9")
+
         self.grid_size = grid_size
         self.num_of_ships = num_of_ships
 
@@ -31,7 +36,7 @@ class BattleshipGame:
         """
         print("The Player's Board:")
 
-        print("    " + " ".join(str(i) for i in range(1, self.grid_size + 1))
+        print("    " + " ".join(chr(65 + i) for i in range(self.grid_size))
         )
         print("  +" + " -" * self.grid_size + " +")
 
@@ -50,7 +55,7 @@ class BattleshipGame:
         else:
             computer_board_to_display = self.computer_board
 
-        print("    " + " ".join(str(i) for i in range(1, self.grid_size + 1))
+        print("    " + " ".join(chr(65 + i) for i in range(self.grid_size))
         )
         print("  +" + " -" * self.grid_size + " +")
 
@@ -89,13 +94,13 @@ class BattleshipGame:
             print("That is a hit!")
             self.computer_ships_remaining -= 1
             if self.computer_ships_remaining == 0:
-                print("Congratulations!!! You have just sunk all the of the computer's ships.")
+                print("Congratulations!!! You have just sunk all of the computer's ships.")
             else:
-                print(f"The computer has only {self.computer_ships_remaining} more ships to sink")
+                print(f"The computer has only {self.player_ships_remaining} more ships to sink")
             self.computer_board[row][col] = "X"
             time.sleep(2)
 
-        #Checks if player missed
+        #Checks if the player missed
         else:
             print("Missed! Better luck next time.")
             self.computer_board[row][col] = "M"
@@ -107,12 +112,12 @@ class BattleshipGame:
         Process the computer's guess.
         """
         while True:
-            row = random.randint(1, self.grid_size - 1)
-            col = random.randint(1, self.grid_size - 1)
+            row = random.randint(0, self.grid_size - 1)
+            col = random.randint(0, self.grid_size - 1)
             if self.player_board[row][col] not in ["X", "M"]:
                 break
         if self.player_board[row][col] == "0":
-            print(f"Computer has hit your ship at ({row}, {col})")
+            print(f"Computer has hit your ship at ({chr(65 + col)}, {row + 1})")
             self.player_ships_remaining -= 1
             if self.player_ships_remaining == 0:
                 print("Oh no! The computer sank all your ships. Better luck next time!")
@@ -121,7 +126,7 @@ class BattleshipGame:
             self.player_board[row][col] = "X"
             time.sleep(2)
         else:
-            print(f"Computer has missed your ship at ({row}, {col})")
+            print(f"Computer has missed your ship at ({chr(65 + col)}, {row + 1})")
             self.player_board[row][col] = "M"
             time.sleep(2)
 
@@ -135,21 +140,21 @@ class BattleshipGame:
             while True:
                 try:
                     guess_row = int(input(f"Guess a row (1-{self.grid_size}): "))
-                    guess_col = int(input(f"Guess a column (1-{self.grid_size}): "))
+                    guess_col = input(f"Guess a column (A-{chr(64 + self.grid_size)}): ").upper()
 
                     if (
                         guess_row < 1
                         or guess_row > self.grid_size
-                        or guess_col < 1
-                        or guess_col > self.grid_size
+                        or ord(guess_col) < 65
+                        or ord(guess_col) > (65 + self.grid_size - 1)
                     ):
                         print("That's outside the grid")
                         continue
 
-                    if self.player_guess(guess_row - 1, guess_col - 1):
+                    if self.player_guess(guess_row - 1, ord(guess_col) - 65):
                         break
                 except ValueError:
-                    print("Please enter a number")
+                    print("Please enter a valid number and letter combination (e.g., 1 A)")
 
             if not any("0" in row for row in self.computer_board):
                 break
@@ -160,7 +165,7 @@ class BattleshipGame:
             if not any("0" in row for row in self.player_board):
                 break
 
-#Starting page before game start with introduction and rules
+# Starting page before game start with introduction and rules
 if __name__ == "__main__":
     print("===============================================================================================================")
     print("                                      Welcome to Battleship!")
@@ -173,38 +178,38 @@ if __name__ == "__main__":
     your skills and emerge victorious in this micro-sized maritime showdown?
 
     What the symbols mean:
-    ·  = Symbolizes that this coordinate haven't been shot at
+    ·  = Symbolizes that this coordinate hasn't been shot at
     X  = Symbolizes that a ship has been struck
     M  = Symbolizes that you missed and hit nothing.
-    0  = Symbolizes where your ships are located at
+    0  = Symbolizes where your ships are located.
 
     How to play:
-    1. Whenever you feel you want to play a new game, restart the current one or have just finished playing press the
-    big button called "Run Program".
-    2. Type in the terminal how large you want your square grid to be. If you type 6, it will produce a 6x6 grid
-    3. Type in how many ships you want to play with. These ships will be scattered around the grid randomly
+    1. Whenever you feel you want to play a new game, restart the current one, or have just finished playing, press the
+    big button called "Run Program."
+    2. Type in the terminal how large you want your square grid to be. If you type 6, it will produce a 6x6 grid.
+    3. Type in how many ships you want to play with. These ships will be scattered around the grid randomly.
     4. You are now presented with 2 different game boards. The one on top is where your ships are located, and keeps
-    track where the computer has aimed their shots,and the bottom one is the grid for the computer and keeps track where
-    you have aimed your shots.
-    5. Type in the terminal what row you want to aim at and afterwards what column. E.g Type in 1 in row, and later 3 in
-    column to shot at the 1,3 coordinate.
-    6. You will be presented with eiter an X - which means you have hit a ship, or M - which symbolizes that you missed.
+    track of where the computer has aimed their shots, and the bottom one is the grid for the computer and keeps track of
+    where you have aimed your shots.
+    5. Type in the terminal what row you want to aim at and afterwards what column. E.g., type in 1 in the row and later
+    A in the column to shoot at the A1 coordinate.
+    6. You will be presented with either an X, which means you have hit a ship, or M, which symbolizes that you missed.
     7. The aim of the game is to sink every ship of your opponent.
-    8. And the most important: To have fun!
+    8. And, most importantly, have fun!
     """
     )
 
-    #Collects user input for grid size and the number of ships to set up the game.
+    # Collects user input for grid size and the number of ships to set up the game.
     while True:
         while True:
             try:
-                size = int(input("Enter the grid size: "))
-                if size <= 0:
-                    print("Grid size should be greater than 0.")
+                size = int(input("Enter the grid size (1-9): "))
+                if size < 1 or size > 9:
+                    print("Grid size should be between 1 and 9.")
                     continue
                 break
             except ValueError:
-                print("Please enter a number")
+                print("Please enter a valid number")
 
         while True:
             try:
@@ -216,11 +221,11 @@ if __name__ == "__main__":
                 break
             except ValueError as e:
                 if "Number of ships can't exceed the grid size" in str(e):
-                    print("You have entered more ships than the grid!")
+                    print("You have entered more ships than the grid can accommodate!")
                 else:
-                    print("Please enter a number")
+                    print("Please enter a valid number")
 
-        #Continues or ends the game based on the player's input.
+        # Continues or ends the game based on the player's input.
         game.play()
         play_again = input("Do you want to play again? (yes/no): ")
         if play_again.lower() != "yes":
