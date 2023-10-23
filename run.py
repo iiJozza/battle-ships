@@ -1,7 +1,6 @@
 import random
 import time
 
-
 class BattleshipGame:
     def __init__(self, grid_size, num_of_ships):
         """
@@ -82,7 +81,7 @@ class BattleshipGame:
         Handles player's guesses, hits and misses.
         """
         # Failsafe if the user picked the same space
-        if self.computer_board[row][col] in ["M"]:
+        if self.computer_board[row][col] == "M":
             print("You already guessed that spot, try again")
             return False
 
@@ -135,12 +134,13 @@ class BattleshipGame:
 
             while True:
                 try:
-                    guess_row = input(f"Guess a row (A-{chr(64 + self.grid_size)}): ").upper()
-                    guess_col = int(input(f"Guess a column (1-{self.grid_size}): "))
+                    max_char = chr(64 + self.grid_size)
+                    guess_row = input(f"Guess a row (A-{max_char}): ").upper()
+                    guess_col = int(input(f"Column (1-{self.grid_size}): "))
 
                     if (
-                        ord(guess_row) < 65
-                        or ord(guess_row) > (65 + self.grid_size - 1)
+                        ord(guess_row.upper()) < 65
+                        or ord(guess_row.upper()) > (65 + self.grid_size - 1)
                         or guess_col < 1
                         or guess_col > self.grid_size
                     ):
@@ -149,6 +149,7 @@ class BattleshipGame:
 
                     if self.player_guess(ord(guess_row) - 65, guess_col - 1):
                         break
+
                 except ValueError:
                     print("Enter a valid combination (e.g., A + 1)")
 
