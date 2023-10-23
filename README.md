@@ -43,3 +43,4 @@ Navigate to the GitHub Repository you want to clone to use locally:
 - Type git clone copied-git-url into the IDE terminal
 
 The project will now have been cloned on your local machine for use.
+
