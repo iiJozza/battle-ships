@@ -165,6 +165,15 @@ class BattleshipGame:
             if not any("0" in row for row in self.player_board):
                 break
 
+    def loading_animation(self, seconds):
+        """
+        Small loading animation
+        """
+        for _ in range(seconds):
+            print(". ", end="", flush=True)
+            time.sleep(1)  
+        print()
+
 # Starting page before game start with introduction and rules
 
 
@@ -238,6 +247,14 @@ Symbolizes that you missed and hit nothing
 
         # Continues or ends the game based on the player's input.
         game.play()
-        play_again = input("Do you want to play again? (yes/no): ")
-        if play_again.lower() != "yes":
-            break
+        while True:
+            play_again = input("Do you want to play again? (yes/no): ")
+            if play_again.lower() == "yes":
+                print("Perfect! Let me start a new game for you.")
+                game.loading_animation(3)
+                break
+            elif play_again.lower() == "no":
+                print("Thank you for playing.")
+                exit()
+            else:
+                print("Please choose 'yes' or 'no'")
