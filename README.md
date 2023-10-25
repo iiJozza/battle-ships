@@ -3,6 +3,29 @@
     the playing field features only 1x1 ships, creating an intense and
     strategic challenge.
 
+## Table of Contents
+
+1. [**Battleship**](#battleships-game)
+   * [How to Play](#how-to-play)
+     * [Setup](#setting-up-the-game)
+     * [Scoring](#how-to.scoring)
+     * [Winning the Game](#winning-the-game)
+     * [Exiting the Game](#exiting-the-game)
+2. [**User Experience (UX)**](#user-experience-ux)
+   * [User Stories](#user-stories)
+3. [**Features**](#game-features)
+   * [Features Left to Implement](#features-left-to-implement)
+4. [**Testing**](#testing)
+   * [Testing during development](#testing-during-development)
+   * [Bugs Found](#bugs-found)
+   * [Functional Testing](#functional-testing)
+   * [Validator Testing](#validator-testing)
+5. [**Technologies and Libraries Used**](#technologies-and-libraries-used)
+6. [**Deployment**](#deployment)
+   * [Deploying to Heroku](#to-deploy-to-heroku-terminal)
+   * [Deployment to Github](#clone-the-repository-code-from-github-desktop)
+7. [**Credits**](#credits)
+
 ## How to Play
 Battleship is a classic two-player strategy game where the goal is to sink all of your opponent's ships before they sink yours. The game is typically played on a grid, and each player has a set number of ships to place on their grid. In this itteration you play against a computer with an army of 1x1 ships.
 
@@ -15,11 +38,43 @@ The game uses a hit/miss system for scoring. Each turn the player guesses a coor
 ### Winning the Game
 The game continues until one player has sunk all of their opponent's ships. In the traditional game, a ship is considered "sunk" when every part of the ship has been hit. 
 
-## Running the Game
-To play this Battleship game implementation, follow these steps:
+## Exit the Game
+You can exit the game at any point by entering "exit" when prompted for any input.
 
 ### Start the Game
 Run the Python script provided for this game. You can specify the grid size (e.g., 9x9) and the number of ships you want to play with.
+
+## User Experience (UX)
+
+### User Stories
+
+1. As a player, I want to be able to choose the size of the game grid (from 1x1 to 9x9) so that I can customize the game's difficulty.
+
+2. As a player, I want to specify the number of ships on the grid so that I can control the level of challenge.
+
+3. As a player, I want to see my game board with row and column labels, so I can easily make targeted guesses.
+
+4. As a player, I want to make a guess by specifying a coordinate (e.g., "A3") to hit the opponent's ships.
+
+5. As a player, I want to know if I hit or missed a ship, so I can track my progress.
+
+6. As a player, I want to be informed if I've already guessed a particular spot, so I don't waste turns.
+
+7. As a player, I want to see the opponent's game board, with their ships hidden, so I can plan my moves strategically.
+
+8. As a player, I want the game to notify me when I've sunk all of the opponent's ships, declaring me the winner.
+
+9. As a player, I want the game to switch to the opponent's turn automatically, so I can play against the computer.
+
+10. As a player, I want the computer opponent to make guesses at random, adding a challenge to the game.
+
+11. As a player, I want the game to continue until one side wins, allowing for multiple rounds.
+
+12. As a player, I want to be able to quit the game at any time by typing "exit" to end the session.
+
+13. As a player, I want clear instructions on how to play the game, so I can quickly understand the rules.
+
+14. As a player, I want to have fun and be entertained while playing the game, making it an enjoyable experience.
 
 ## Features
 
@@ -64,6 +119,32 @@ Players are shown clear instructions on how to play the game and how to use the 
 - Different sized ships: Makes the game more tactical and complex which in turn makes the gamemore fun.
 - Player vs Player: Have the option to play against a human opponent.
 - Scoreboard: Keep a tally of who has won.
+- Make the game more visually appealing.
+- Find a way to indent text without repeating code. 
+
+## Testing
+
+### Testing during development
+
+* Continuous testing throughout development - Both before and after deployment.
+* `print()`and `type()` were used during the development process, to help identify possible errors and bugs.
+* All the prompts to the user were tested manually.
+
+### Functional Testing
+
+The game was first developed using the IDE PyCharm and a small amounts of manual testing was carried out before the initial deployment to Heroku. Testing efforts significantly expanded post-deployment on Heroku. Every available input option was rigorously tested across all potential scenarios, with a particular focus on input validation. The player's and computer's boards were carefully observed to detect any modifications resulting from each turn's guesses. Manual testing included thorough examination of invalid imputs and the "exit" functionality on all player prompts.
+
+### Bugs Found
+
+* Text not displaying properly - Some text was indented while others not (fixed)
+* The players action wasn't displayed on the grid (fixed)
+* The player couldn't exit the game on the "Guess a column between ..." (fixed)
+
+### Validator Testing
+
+[CI Python Linter](https://pep8ci.herokuapp.com/) was used for validating the python files.  No errors reported.
+
+![Pep8 Results Screenshot](assets/images/validator.png)
 
 ## Technologies and Libraries Used
 
@@ -75,6 +156,7 @@ Players are shown clear instructions on how to play the game and how to use the 
 * [Heroku](https://dashboard.heroku.com/apps) was used to deploy the game on the web.
 * [Git](https://git-scm.com/) was used to commit and push code during the development stage.
 * [Codeanywhere](https://app.codeanywhere.com/) was used as an IDE.
+* [Pycharm](https://www.jetbrains.com/pycharm/nextversion/) was used as an IDE during early stages of development.
 
 ## Deployment
 
@@ -83,7 +165,7 @@ This project was developed utilizing the [Code Institute Template](https://githu
 
 `pip freeze > requirements.txt` was used to add pyfiglet and Colorama imports to Heroku for deployment.
 
-## Deploying a Python Web Application to Heroku
+### Deploying to Heroku
 
 This guide will walk you through deploying a Python web application to Heroku using the Heroku Dashboard. It doesn't require a command-line interface (CLI). Make sure you have a Heroku account and Git installed on your local machine.
 
@@ -129,7 +211,7 @@ This guide will walk you through deploying a Python web application to Heroku us
 
 2. Heroku will open your application in a new tab. You can also access it directly via the URL provided (e.g., `https://your-app-name.herokuapp.com`).
 
-### Deployment to Github Pages
+### Deployment to Github
 
 - The site was deployed to GitHub pages. The steps to deploy are as follows:
   - In the GitHub repository, navigate to the Settings tab
