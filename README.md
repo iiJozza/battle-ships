@@ -23,6 +23,59 @@ Run the Python script provided for this game. You can specify the grid size (e.g
 
 ## Features
 
+**ASCII Art**
+
+Gives the inreoduction screen a bit of flare and retro wibe. Makes the user more inclined to try the game out compared to if it was in plain text.
+
+![ASCII title](assets/images/start.png)
+
+**Colourful terminal**
+
+Players are greeted by colourful text. Utilizing the colorama library to give the players a more inviting first impression. 
+
+**Interactive Gameplay**
+
+- Players are able to not only choose the gameboard size ranging from 1x1 to 9x9. 
+- Players are also able to choose how many ships they want to play with.
+
+**Computer opponent**
+
+Players compete against a computer opponent that targets the game board randomly.
+
+**Replayability**
+
+- Players are able to restart and exit the game anytime by typing exit in the terminal.
+- Players will also be given the option to restart or exit when they have either won or lost the game.
+
+![Using the exit command on input prompt](assets/images/exit_command.png)
+
+**Instructions**
+
+Players are shown clear instructions on how to play the game and how to use the terminal the moment they boot it up. 
+
+**The Grid**
+
+- Players are given a game board which shows exactly where both player and computer have aimed - with clear symbols if they hit or missed their target.
+- A small delay between each action makes the gameplay more understandable and in the long run, more enjoyable.
+
+### Features I Want to Implement
+
+- A more colourful board: I wanted each symbol to be a specific colour on the grid.
+- Different sized ships: Makes the game more tactical and complex which in turn makes the gamemore fun.
+- Player vs Player: Have the option to play against a human opponent.
+- Scoreboard: Keep a tally of who has won.
+
+## Technologies and Libraries Used
+
+* The game logic was implemented using Python as the programming language.
+
+* [Colorama](https://pypi.org/project/colorama/) was installed and imported for adding color to text to make it easier to read.
+* [Pyfiglet](https://pypi.org/project/pyfiglet/0.7/) was installed and imported for adding ascii art to the game title.
+* [GitHub](https://github.com/) has been used to store the code, images, and other content related to the project.
+* [Heroku](https://dashboard.heroku.com/apps) was used to deploy the game on the web.
+* [Git](https://git-scm.com/) was used to commit and push code during the development stage.
+* [Codeanywhere](https://app.codeanywhere.com/) was used as an IDE.
+
 ## Deployment
 
 The site was deployed via [Heroku](https://id.heroku.com/login).

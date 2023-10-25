@@ -243,6 +243,7 @@ Guess a column between (1-{self.grid_size}): ")
 
 if __name__ == "__main__":
     # Starting page before game start with introduction and rules
+
     from colorama import Fore, Back, Style, init
 
     init()  # Initialize colorama
