@@ -133,15 +133,6 @@ class BattleshipGame:
             self.player_board[row][col] = "M"
             time.sleep(2)
 
-    def loading_animation(self, seconds):
-        """
-        Small loading animation with dots
-        """
-        for _ in range(seconds):
-            print(". ", end="", flush=True)
-            time.sleep(0.7)  
-        print()
-
     def play(self):
         """
         Main game loop where the player and computer take turns guessing.
@@ -151,36 +142,70 @@ class BattleshipGame:
 
             while True:
                 try:
+                    # Row
                     max_char = chr(64 + self.grid_size)
                     guess_row = input(f"Guess a row (A-{max_char}): ").upper()
-                    guess_col = int(input(f"Column (1-{self.grid_size}): "))
+                    
+                    # Checks if the player wants to exit the game 
+                    if guess_row.lower() == "exit":
+                        print("Exiting the game. Goodbye!")
+                        return
 
+                    # Checks if it's a letter
+                    if not guess_row.isalpha():
+                        print(f"Invalid input. Please enter a letter between \
+(A-{max_char}).")
+                        continue
+                    
+                    # Column
+                    guess_col = input(f"Column (1-{self.grid_size}): ")
+                    
+                    # Checks if the player wants to exit the game
+                    if guess_col.lower() == "exit":
+                        print("Exiting the game. Goodbye!")
+                        return
+                    
+                    # Converts from str -> int
+                    else:
+                        guess_col = int(guess_col)
+                    
+                    # Checks if the number is valid
                     if (
                         ord(guess_row.upper()) < 65
                         or ord(guess_row.upper()) > (65 + self.grid_size - 1)
-                        or guess_col < 1
-                        or guess_col > self.grid_size
+                        or int(guess_col) < 1
+                        or int(guess_col) > self.grid_size
                     ):
                         print("That's outside the grid")
                         continue
 
                     if self.player_guess(ord(guess_row) - 65, guess_col - 1):
                         break
-
+                
+                # Error message for invalid column input
                 except ValueError:
-                    print("Enter a valid combination (e.g., A + 1)")
+                    print(f"Enter a valid number between 1 -{self.grid_size}!")
 
+            #  Checks if player won and ends the game if true.
             if not any("0" in row for row in self.computer_board):
                 break
 
             print("\nThe Computer's Turn")
-            game.loading_animation(3)
             self.computer_guess()
-
+            
+            # Checks if computer won and ends the game if true
             if not any("0" in row for row in self.player_board):
                 break
 
-
+    # Small simulation of the computer "thinking"
+    def loading_animation(self, seconds):
+        """
+        Small loading animation with dots
+        """
+        for _ in range(seconds):
+            print(". ", end="", flush=True)
+            time.sleep(0.7)  
+        print()
 
 # Starting page before game start with introduction and rules
 
