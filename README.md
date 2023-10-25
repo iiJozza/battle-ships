@@ -8,10 +8,14 @@ strategic challenge. [Live version here!](https://iijozzabattleships-8dbba31357c
 
 1. [**Battleship**](#battleships-game)
    * [How to Play](#how-to-play)
-     * [Setup](#setting-up-the-game)
-     * [Scoring](#how-to.scoring)
-     * [Winning the Game](#winning-the-game)
-     * [Exiting the Game](#exiting-the-game)
+     * [Start the Game](#setting-up-the-game)
+     * [Set Grid Size](#how-to-set-up-a-grid')
+     * [Choose Ship Count](#winning-the-game)
+     * [Take Shots](#shooting-at-your-opponent)
+     * [Turn-Based Gameplay](#computer-turn)
+     * [Objective](#objective-of-the-game)
+     * [Restart or Quit](#restarting-the-game)
+     * [Have Fun](#having-fun)
 2. [**User Experience (UX)**](#user-experience-ux)
    * [User Stories](#user-stories)
 3. [**Features**](#game-features)
@@ -32,25 +36,43 @@ strategic challenge. [Live version here!](https://iijozzabattleships-8dbba31357c
 
 Battleship is a classic two-player strategy game where the goal is to sink all of your opponent's ships before they sink yours. The game is typically played on a grid, and each player has a set number of ships to place on their grid. In this itteration you play against a computer with an army of 1x1 ships.
 
-### Setup: 
+1. **Start the Game**
 
-The grids are usually square and can vary in size, but a common grid size is 9x9. In this implementation, you can choose both the size of the grid, up to 9x9 and the amount of ships. The ship are randomly distributed around the grid.
+   - Begin the game by pressing the "Run Program" button.
 
-### Scoring:
+![Run Program](assets/images/run.png)
 
-The game uses a hit/miss system for scoring. Each turn the player guesses a coordiante on where they think a ship might be, hoping to hit the opposing players ship. The player and computer alternate taking turns until someone sinks all of the others ship(s)."
+2. **Set Grid Size**
 
-### Winning the Game
+   - Type your preferred grid size. For example, typing '6' will create a 6x6 grid.
 
-The game continues until one player has sunk all of their opponent's ships. In the traditional game, a ship is considered "sunk" when every part of the ship has been hit. 
+3. **Choose Ship Count**
 
-## Exit the Game
+   - Type the number of ships you want to play with. They will be placed randomly on the grid.
 
-You can exit the game at any point by entering "exit" when prompted for any input.
+![Input for grid and ship](assets/images/input-grid-ships.png)
 
-### Start the Game
+4. **Take Shots**
 
-Run the Python script provided for this game. You can specify the grid size (e.g., 9x9) and the number of ships you want to play with.
+   - The top grid represents your fleet, and the bottom grid represents your opponent's fleet. To fire a shot, type a coordinate, e.g., "(A, 3)," to target the corresponding tile. If you or the computer hit a target an "X" will now show on the grid on the coordinate. If you or the computer misses an "M" will be located on the grid where the shot was aimed at.
+
+![Input for grid and ship](assets/images/shot-hit.png)
+
+5. **Turn-Based Gameplay**
+
+   - The computer and the user take alternating turns until a winner is determined.
+
+6. **Objective**
+
+   - The goal of the game is to sink every ship in your opponent's fleet.
+
+7. **Restart or Quit**
+
+   - To start a new game or quit, simply type "exit."
+
+8. **Have Fun**
+
+   - Most importantly, enjoy the game and have fun!
 
 ## User Experience (UX)
 
@@ -96,6 +118,8 @@ Gives the inreoduction screen a bit of flare and retro wibe. Makes the user more
 
 Players are greeted by colourful text. Utilizing the colorama library to give the players a more inviting first impression. 
 
+![Startpage](assets/images/instructions.png)
+
 **Interactive Gameplay**
 
 - Players are able to not only choose the gameboard size ranging from 1x1 to 9x9. 
@@ -107,19 +131,25 @@ Players compete against a computer opponent that targets the game board randomly
 
 **Replayability**
 
-- Players are able to restart and exit the game anytime by typing exit in the terminal.
-- Players will also be given the option to restart or exit when they have either won or lost the game.
+- Players are able to restart or exit the game anytime by typing exit in the terminal where they will be greeted with "Do you want to play again? (yes/no)"
+    - If player inputs "yes" the game will restart and the player have to input grid size and ship amount again.
+    - If player inputs "no" the game will exit.
 
-![Using the exit command on input prompt](assets/images/exit.png)
+![Inputing no on exit command](assets/images/exit.png)
+![Inputting "yes" on exit command](assets/images/restart.png)
 
 **Instructions**
 
 Players are shown clear instructions on how to play the game and how to use the terminal the moment they boot it up. 
 
+![Inputing no on exit command](assets/images/instructions.png)
+
 **The Grid**
 
 - Players are given a game board which shows exactly where both player and computer have aimed - with clear symbols if they hit or missed their target.
 - A small delay between each action makes the gameplay more understandable and in the long run, more enjoyable.
+
+![Inputing no on exit command](assets/images/grid.png)
 
 ### Features I Want to Implement
 
@@ -128,6 +158,10 @@ Players are shown clear instructions on how to play the game and how to use the 
 - Player vs Player: Have the option to play against a human opponent.
 - Scoreboard: Keep a tally of who has won.
 - Make the game more visually appealing.
+    - Colours on the different symbols on the grid. x -> red, M -> blue and 0 -> brown
+    - The sorounding grid should be more colourful
+    - The text should be more colourful
+    - There shouldn't be as many differing colours and should be kept to a red, blue and white theme
 - Find a way to indent text without repeating code.
 - Add exit command in the "Enter the number of ships:" and "Enter the grid size (1-9):" section of the game
 
@@ -272,6 +306,4 @@ The project will now have been cloned on your local machine for use.
 
 ## Acknowledgements
 
-- I would like to thank Carolina Leguizamon for helping me kickstart the project, giving me ideas and general encouragement throughout the project. Was a huge help keeping me level-headed and continue coding when times were tough.
-
-
+- I would like to thank Carolina Leguizamon for helping me kickstart the project, giving me ideas and overall encouragement throughout the project. Was a huge help keeping me level-headed and continue coding when times were tough.
