@@ -1,7 +1,7 @@
 # Battleship Game Readme
     Welcome to a thrilling game of Battleship with a twist! In this version,
     the playing field features only 1x1 ships, creating an intense and
-    strategic challenge.
+    strategic challenge. [Live version here!](https://iijozzabattleships-8dbba31357c0.herokuapp.com/)
 
 ## Table of Contents
 
@@ -23,7 +23,7 @@
 5. [**Technologies and Libraries Used**](#technologies-and-libraries-used)
 6. [**Deployment**](#deployment)
    * [Deploying to Heroku](#to-deploy-to-heroku-terminal)
-   * [Deployment to Github](#clone-the-repository-code-from-github-desktop)
+   * [Deployment to Githubtable of contents](#clone-the-repository-code-from-github-desktop)
 7. [**Credits**](#credits)
 
 ## How to Play
