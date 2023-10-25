@@ -177,7 +177,7 @@ Guess a row between (A-{max_char}): ").upper()
 
                     # Checks if the player wants to exit the game
                     if guess_row.lower() == "exit":
-                        print(f"{extra_spaces}Exiting the game. Goodbye!")
+                        print(f"{extra_spaces}Exiting the game")
                         return
 
                     # Checks if it's a letter

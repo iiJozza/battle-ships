@@ -1,7 +1,8 @@
 # Battleship Game Readme
-    Welcome to a thrilling game of Battleship with a twist! In this version,
-    the playing field features only 1x1 ships, creating an intense and
-    strategic challenge. [Live version here!](https://iijozzabattleships-8dbba31357c0.herokuapp.com/)
+
+Welcome to a thrilling game of Battleship with a twist! In this version,
+the playing field features only 1x1 ships, creating an intense and
+strategic challenge. [Live version here!](https://iijozzabattleships-8dbba31357c0.herokuapp.com/)
 
 ## Table of Contents
 
@@ -27,21 +28,27 @@
 7. [**Credits**](#credits)
 
 ## How to Play
+
 Battleship is a classic two-player strategy game where the goal is to sink all of your opponent's ships before they sink yours. The game is typically played on a grid, and each player has a set number of ships to place on their grid. In this itteration you play against a computer with an army of 1x1 ships.
 
 ### Setup: 
+
 The grids are usually square and can vary in size, but a common grid size is 9x9. In this implementation, you can choose both the size of the grid, up to 9x9 and the amount of ships. The ship are randomly distributed around the grid.
 
 ### Scoring:
+
 The game uses a hit/miss system for scoring. Each turn the player guesses a coordiante on where they think a ship might be, hoping to hit the opposing players ship. The player and computer alternate taking turns until someone sinks all of the others ship(s)."
 
 ### Winning the Game
+
 The game continues until one player has sunk all of their opponent's ships. In the traditional game, a ship is considered "sunk" when every part of the ship has been hit. 
 
 ## Exit the Game
+
 You can exit the game at any point by entering "exit" when prompted for any input.
 
 ### Start the Game
+
 Run the Python script provided for this game. You can specify the grid size (e.g., 9x9) and the number of ships you want to play with.
 
 ## User Experience (UX)
@@ -102,7 +109,7 @@ Players compete against a computer opponent that targets the game board randomly
 - Players are able to restart and exit the game anytime by typing exit in the terminal.
 - Players will also be given the option to restart or exit when they have either won or lost the game.
 
-![Using the exit command on input prompt](assets/images/exit_command.png)
+![Using the exit command on input prompt](assets/images/exit.png)
 
 **Instructions**
 
@@ -120,7 +127,8 @@ Players are shown clear instructions on how to play the game and how to use the 
 - Player vs Player: Have the option to play against a human opponent.
 - Scoreboard: Keep a tally of who has won.
 - Make the game more visually appealing.
-- Find a way to indent text without repeating code. 
+- Find a way to indent text without repeating code.
+- Add exit command in the "Enter the number of ships:" and "Enter the grid size (1-9):" section of the game
 
 ## Testing
 
@@ -133,6 +141,35 @@ Players are shown clear instructions on how to play the game and how to use the 
 ### Functional Testing
 
 The game was first developed using the IDE PyCharm and a small amounts of manual testing was carried out before the initial deployment to Heroku. Testing efforts significantly expanded post-deployment on Heroku. Every available input option was rigorously tested across all potential scenarios, with a particular focus on input validation. The player's and computer's boards were carefully observed to detect any modifications resulting from each turn's guesses. Manual testing included thorough examination of invalid imputs and the "exit" functionality on all player prompts.
+
+| Test Case                                                                | Action                                                               | Expected Outcome                                                          | Actual Outcome                                                                       | Pass/Fail | Issues                                                                                                |
+| ------------------------------------------------------------------------ | -------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ | --------- | ----------------------------------------------------------------------------------------------------- |
+| Game Initialization                                                      |                                                                      |                                                                           |
+| Start Game                                                               | Clicking the "run program" in Heroku or typing python3 run.py in IDE | Game starts with introduction, ASCII title, and instructions              | Introduced to instructions only and the user have to scroll up to see the ASCII art. | PASS      | NONE                                                                                                  |
+| Setting Game Grid Size                                                   |                                                                      |                                                                           |
+| Valid Grid Size Input                                                    | Input a number between 1 - 9                                         | Input is accepted and proceeds to generate grid                           | Input is accepted and proceeds to generate grid                                      | PASS      | NONE                                                                                                  |
+| Invalid Grid Size Input                                                  | Input a number outside the range 1 - 9                               | Error message displayed and prompted to input valid number                | Error message displayed and prompted to input valid number                           | PASS      | NONE                                                                                                  |
+| Non-numeric Input                                                        | Input a non-numeric character (e.g., 'A')                            | Input a non-numeric character (e.g., 'A' or '}')                          | Error message displayed and prompted to input valid number                           | PASS      | NONE                                                                                                  |
+| Configuring Ship Quantity                                                |                                                                      |                                                                           |
+| Valid Ship quantity input                                                | Place a ship within the grid boundaries                              | Input is accepted and proceeds to generate ships                          | Input is accepted and proceeds to generate ships                                     | PASS      | NONE                                                                                                  |
+| Invalid Ship quantity input                                              | Place a ship outside grid or overlapping another ship                | Error message displayed and prompted to input valid number                | Error message displayed and prompted to input valid number                           | PASS      | NONE                                                                                                  |
+| Non-numeric Input                                                        | Input a non-numeric character (e.g., 'A')                            | Input a non-numeric character (e.g., 'A' or '}')                          | Error message displayed and prompted to input valid number                           | PASS      | NONE                                                                                                  |
+| Gameplay                                                                 |                                                                      |                                                                           |
+| Valid Shot Position                                                      | Choose a valid grid position for shot                                | Display 'Hit' or 'Miss' based on shot outcome                             | Display 'Hit' or 'Miss' based on shot outcome                                        | PASS      | NONE                                                                                                  |
+| Invalid Shot Position                                                    | Choose a grid position outside boundaries                            | Error message displayed and prompted to choose valid position             | Error message displayed and prompted to choose valid position                        | PASS      | NONE                                                                                                  |
+| Repeat Shot Position                                                     | Shoot at a previously chosen position                                | Error message indicating position was already shot at                     | Error message indicating position was already shot at                                | PASS      | NONE                                                                                                  |
+| Game End Conditions                                                      |                                                                      |                                                                           |
+| Player Wins                                                              | Sink all computer's ships                                            | Display victory message                                                   | Display victory message                                                              | PASS      | NONE                                                                                                  |
+| Computer Wins                                                            | All player's ships are sunk by computer                              | Display defeat message                                                    | Display defeat message                                                               | PASS      | NONE                                                                                                  |
+| Inputing "Exit" When Configurating Game                                  |                                                                      | Game exits and user prompted with a "Do you want to play again? (yes/no): | Display error message                                                                | FAIL      | The current iteration of the game don't have an exit function implemented in the configuration sstage |
+| Inputing "Exit" During Game                                              |                                                                      | Game exits and user prompted with a "Do you want to play again? (yes/no): | Game exits and user prompted with a "Do you want to play again? (yes/no):            | PASS      | NONE                                                                                                  |
+| Input "no" During Exit Command                                           | Input 'exit' or 'quit' during any input prompt                       | Game exits immediately                                                    | Game exits immediately                                                               | PASS      | NONE                                                                                                  |
+| Input "yes" During Exit Command                                          |                                                                      | Game restarts from the beginning                                          | Game restarts from the beginning                                                     | PASS      | NONE                                                                                                  |
+| Invalid Input During Exit command                                        |                                                                      | Error message displayed and user is prompted to try again                 | Error message displayed and user is prompted to try again                            | PASS      | NONE                                                                                                  |
+| Inputing "yes" or "no" in a variation of uppercase and lowercase letters | After game ends, choose to play again                                | Input accepted and proceeds to execute the provided command               | Input accepted and proceeds to execute the provided command                          | PASS      | NONE                                                                                                  |
+| Visual & Usability                                                       |                                                                      |                                                                           |
+| Game Layout and Design                                                   | Observe game interface                                               | Ensure that ASCII art, grid, and messages display correctly               | ASCII art, grid, and messages display correctly                                      | FAIL      | Due to the amount of instructions the ASCII art is pushed up and hidden if the user don't scroll up.  |
+| Instructions Clarity                                                     | Read the game's instructions                                         | Instructions should be clear and understandable                           | Instructions are clear and understandable                                            | PASS      | NONE                                                                                                  |
 
 ### Bugs Found
 
