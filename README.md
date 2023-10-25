@@ -18,6 +18,7 @@ strategic challenge. [Live version here!](https://iijozzabattleships-8dbba31357c
    * [Features Left to Implement](#features-left-to-implement)
 4. [**Testing**](#testing)
    * [Testing during development](#testing-during-development)
+   * [Functional Testing](#specific-testing)
    * [Bugs Found](#bugs-found)
    * [Functional Testing](#functional-testing)
    * [Validator Testing](#validator-testing)
