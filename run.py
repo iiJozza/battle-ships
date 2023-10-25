@@ -90,17 +90,20 @@ class BattleshipGame:
 
         # Checks if the player hits a ship, and if the player won
         if self.computer_board[row][col] == "0":
-            print("That is a hit!")
+            print(Fore.RED + f"\nThat is a " "hit!" + Style.RESET_ALL)
             self.computer_ships_remaining -= 1
+
             if self.computer_ships_remaining == 0:
                 print("Congratulations!!!")
             else:
                 print(f"There're {self.computer_ships_remaining} ships left")
             self.computer_board[row][col] = "X"
             time.sleep(2)
+
         # Checks if the player missed
         else:
-            print("Missed! Better luck next time.")
+            print(Fore.BLUE + "\nMissed! Better luck next time.\
+" + Style.RESET_ALL)
             self.computer_board[row][col] = "M"
             time.sleep(2)
         return True
@@ -115,18 +118,29 @@ class BattleshipGame:
             if self.player_board[row][col] not in ["X", "M"]:
                 break
         if self.player_board[row][col] == "0":
-            print(f"Computer hit your ship at ({chr(65 + col)}, {row + 1})")
+            print(Fore.RED + f"Computer hit your ship at\
+ ({chr(65 + col)}, {row + 1})" + Style.RESET_ALL)
             self.player_ships_remaining -= 1
             if self.player_ships_remaining == 0:
                 print("Oh no! The computer sank all your ships!")
             else:
-                print(f"You've got {self.player_ships_remaining}ships left")
+                print(f"You've got {self.player_ships_remaining} ships left\n")
             self.player_board[row][col] = "X"
             time.sleep(2)
         else:
-            print(f"Computer has missed! ({chr(65 + col)}, {row + 1})")
+            print(Fore.BLUE + f"\nComputer has missed! They shot at\
+({chr(65 + col)}, {row + 1})" + Style.RESET_ALL)
             self.player_board[row][col] = "M"
             time.sleep(2)
+
+    def loading_animation(self, seconds):
+        """
+        Small loading animation with dots
+        """
+        for _ in range(seconds):
+            print(". ", end="", flush=True)
+            time.sleep(0.7)  
+        print()
 
     def play(self):
         """
@@ -160,19 +174,13 @@ class BattleshipGame:
                 break
 
             print("\nThe Computer's Turn")
+            game.loading_animation(3)
             self.computer_guess()
 
             if not any("0" in row for row in self.player_board):
                 break
 
-    def loading_animation(self, seconds):
-        """
-        Small loading animation
-        """
-        for _ in range(seconds):
-            print(". ", end="", flush=True)
-            time.sleep(1)  
-        print()
+
 
 # Starting page before game start with introduction and rules
 
@@ -202,9 +210,9 @@ version,
         ·  = Symbolizes that this coordinate hasn't been shot at
         """ + Fore.RED + "X" + Fore.MAGENTA + """  = \
 Symbolizes that a ship has been struck
-        """ + Fore.YELLOW + "0" + Fore.MAGENTA + """  = \
+        """ + Fore.WHITE + "0" + Fore.MAGENTA + """  = \
 Symbolizes where your ships are located
-        """ + Fore.WHITE + "M" + Fore.MAGENTA + """  = \
+        """ + Fore.BLUE + "M" + Fore.MAGENTA + """  = \
 Symbolizes that you missed and hit nothing
     """ + Style.RESET_ALL)
 
