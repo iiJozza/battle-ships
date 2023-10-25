@@ -10,15 +10,22 @@ class BattleshipGame:
         Initializes game parameters and boards, placing ships randomly.
         The maximum grid size is 9x9.
         """
+
+        # Validates that the grid size is within the range of 1 to 9
         if grid_size < 1 or grid_size > 9:
             raise ValueError("Grid size must be between 1 and 9")
 
+        # Size of the grid
         self.grid_size = grid_size
+
+        # Number of ships
         self.num_of_ships = num_of_ships
 
+        # Checks if number of ships are not > than total of spaces on the grid
         if self.num_of_ships > self.grid_size * self.grid_size:
             raise ValueError("Number of ships can't exceed the grid size")
 
+        # Creates player and computer game boards
         self.player_board = [
             ["·"] * self.grid_size for _ in range(self.grid_size)
         ]
@@ -26,9 +33,11 @@ class BattleshipGame:
             ["·"] * self.grid_size for _ in range(self.grid_size)
         ]
 
+        # Number of ships remaining
         self.player_ships_remaining = num_of_ships
         self.computer_ships_remaining = num_of_ships
 
+        # Place ships randomly on the boards
         self.place_ships(self.player_board)
         self.place_ships(self.computer_board)
 
@@ -38,6 +47,7 @@ class BattleshipGame:
         """
         print("The Player's Board:")
 
+        # Prints the player's game board with row and column labels
         print("    " + " ".join(chr(65 + i) for i in range(self.grid_size)))
         print("  +" + " -" * self.grid_size + " +")
 
@@ -48,6 +58,7 @@ class BattleshipGame:
 
         print("The Computer's Board:")
 
+        # Hides the computers ships
         if hide_computer_ships:
             computer_board_to_display = [
                 ["·" if cell == "0" else cell for cell in row]
@@ -56,6 +67,7 @@ class BattleshipGame:
         else:
             computer_board_to_display = self.computer_board
 
+        # Prints the computer's game board with row and column labels
         print("    " + " ".join(chr(65 + i) for i in range(self.grid_size)))
         print("  +" + " -" * self.grid_size + " +")
 
@@ -113,10 +125,14 @@ class BattleshipGame:
         Process the computer's guess.
         """
         while True:
+
+            # Randomizes computer guesses
             row = random.randint(0, self.grid_size - 1)
             col = random.randint(0, self.grid_size - 1)
             if self.player_board[row][col] not in ["X", "M"]:
                 break
+
+        # Checks if computer won/hit/miss a ship. Updates grid afterwards
         if self.player_board[row][col] == "0":
             print(Fore.RED + f"Computer hit your ship at\
  ({chr(65 + col)}, {row + 1})" + Style.RESET_ALL)
@@ -145,8 +161,8 @@ class BattleshipGame:
                     # Row
                     max_char = chr(64 + self.grid_size)
                     guess_row = input(f"Guess a row (A-{max_char}): ").upper()
-                    
-                    # Checks if the player wants to exit the game 
+
+                    # Checks if the player wants to exit the game
                     if guess_row.lower() == "exit":
                         print("Exiting the game. Goodbye!")
                         return
@@ -156,19 +172,19 @@ class BattleshipGame:
                         print(f"Invalid input. Please enter a letter between \
 (A-{max_char}).")
                         continue
-                    
+
                     # Column
                     guess_col = input(f"Column (1-{self.grid_size}): ")
-                    
+
                     # Checks if the player wants to exit the game
                     if guess_col.lower() == "exit":
                         print("Exiting the game. Goodbye!")
                         return
-                    
+
                     # Converts from str -> int
                     else:
                         guess_col = int(guess_col)
-                    
+
                     # Checks if the number is valid
                     if (
                         ord(guess_row.upper()) < 65
@@ -181,7 +197,7 @@ class BattleshipGame:
 
                     if self.player_guess(ord(guess_row) - 65, guess_col - 1):
                         break
-                
+
                 # Error message for invalid column input
                 except ValueError:
                     print(f"Enter a valid number between 1 -{self.grid_size}!")
@@ -192,7 +208,7 @@ class BattleshipGame:
 
             print("\nThe Computer's Turn")
             self.computer_guess()
-            
+
             # Checks if computer won and ends the game if true
             if not any("0" in row for row in self.player_board):
                 break
@@ -204,7 +220,7 @@ class BattleshipGame:
         """
         for _ in range(seconds):
             print(". ", end="", flush=True)
-            time.sleep(0.7)  
+            time.sleep(0.7)
         print()
 
 # Starting page before game start with introduction and rules
@@ -252,10 +268,11 @@ Symbolizes that you missed and hit nothing
         7. The aim of the game is to sink every ship of your opponent.
         8. And, most importantly, have fun!
         """ + Style.RESET_ALL)
-   
+
     while True:
         while True:
             try:
+                # Obtains and validates the grid size input from the user
                 size = int(input("Enter the grid size (1-9): "))
                 if size < 1 or size > 9:
                     print("Grid size should be between 1 and 9.")
@@ -266,13 +283,16 @@ Symbolizes that you missed and hit nothing
 
         while True:
             try:
+                # Validates ship count input
                 num_of_ships = int(input("Enter the number of ships: "))
                 if num_of_ships <= 0 or num_of_ships > size * size:
                     print("Ship amount entered is invalid")
                     continue
                 game = BattleshipGame(size, num_of_ships)
                 break
+
             except ValueError as e:
+                # Error message for unvalid input
                 if "Number of ships can't exceed the grid size" in str(e):
                     print("You've entered more ships than the grid can handle")
                 else:
