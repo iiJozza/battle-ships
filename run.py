@@ -174,11 +174,16 @@ if __name__ == "__main__":
     init()  # Initialize colorama
 
     font = pyfiglet.Figlet(font='slant')
-    text = Fore.RED + font.renderText('    BATTLESHIPS')
+    text = (Fore.BLUE + "\
+            ============================================================\n\
+" + Fore.WHITE + font.renderText('    BATTLESHIPS\n') + Fore.RED + "\
+            ============================================================")
+
     print(text)
 
     print(Fore.GREEN + Style.BRIGHT + """
-        Welcome to a thrilling game of Battleship with a twist! In this version,
+        Welcome to a thrilling game of Battleship with a twist! In this\
+version,
         the playing field features only 1x1 ships, creating an intense and
         strategic challenge.
         """ + Style.RESET_ALL)
@@ -186,24 +191,26 @@ if __name__ == "__main__":
     print(Fore.MAGENTA + Style.BRIGHT + """
         What the symbols mean:
         ·  = Symbolizes that this coordinate hasn't been shot at
-        X  = Symbolizes that a ship has been struck
-        M  = Symbolizes that you missed and hit nothing.
-        0  = Symbolizes where your ships are located.
-        """ + Style.RESET_ALL)
+        """ + Fore.RED + "X" + Fore.MAGENTA + """  = \
+Symbolizes that a ship has been struck
+        """ + Fore.YELLOW + "0" + Fore.MAGENTA + """  = \
+Symbolizes where your ships are located
+        """ + Fore.WHITE + "M" + Fore.MAGENTA + """  = \
+Symbolizes that you missed and hit nothing
+    """ + Style.RESET_ALL)
 
     print(Fore.YELLOW + Style.BRIGHT + """
         How to play:
         1. Start the game by pressing the "run program" button
         2. Type your preferred size grid. E.g typing a 6 will make the grid 6x6
-        3. Type your preferred ship amount, ships will scatter the grid randomly
+        3. Type your ship count, they'll be placed randomly on the grid
         4. The top grid is yours and the bottom grid is your opponent's
-        5. Typing a coordinate (A, 3) shots the corresponding tile on your opponent
+        5. Typing a coordinate e.g (A, 3) shots the matching tile
         6. The computer and the user alternate turns until a winner is crowned.
         7. The aim of the game is to sink every ship of your opponent.
         8. And, most importantly, have fun!
         """ + Style.RESET_ALL)
-
-    
+   
     while True:
         while True:
             try:
