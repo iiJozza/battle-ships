@@ -107,7 +107,7 @@ class BattleshipGame:
 
         # Checks if the player hits a ship, and if the player won
         if self.computer_board[row][col] == "0":
-            print(Fore.RED + f"{extra_spaces}\nThat is a " "hit!\
+            print(Fore.RED + f"\n{extra_spaces}That is a " "hit!\
 " + Style.RESET_ALL)
             self.computer_ships_remaining -= 1
 
@@ -122,7 +122,7 @@ ships left")
 
         # Checks if the player missed
         else:
-            print(Fore.BLUE + f"{extra_spaces}\nMissed! Better luck next time.\
+            print(Fore.BLUE + f"\n{extra_spaces}Missed! Better luck next time.\
 " + Style.RESET_ALL)
             self.computer_board[row][col] = "M"
             time.sleep(2)
@@ -155,7 +155,7 @@ ships left\n")
             self.player_board[row][col] = "X"
             time.sleep(2)
         else:
-            print(Fore.BLUE + f"{extra_spaces}\nComputer has missed! \
+            print(Fore.BLUE + f"\n{extra_spaces}Computer has missed! \
 They shot at\
 ({chr(65 + col)}, {row + 1})" + Style.RESET_ALL)
             self.player_board[row][col] = "M"
@@ -221,7 +221,8 @@ Guess a column between (1-{self.grid_size}): ")
             if not any("0" in row for row in self.computer_board):
                 break
 
-            print(f"{extra_spaces}\nThe Computer's Turn")
+            print(f"\n{extra_spaces}The Computer's Turn")
+            game.loading_animation(5)
             self.computer_guess()
 
             # Checks if computer won and ends the game if true
@@ -233,15 +234,15 @@ Guess a column between (1-{self.grid_size}): ")
         """
         Small loading animation with dots
         """
+        print(f"{extra_spaces}", end="", flush=True)
         for _ in range(seconds):
-            print(f"{extra_spaces}. ", end="", flush=True)
+            print(". ", end="", flush=True)
             time.sleep(0.7)
         print()
 
-# Starting page before game start with introduction and rules
-
 
 if __name__ == "__main__":
+    # Starting page before game start with introduction and rules
     from colorama import Fore, Back, Style, init
 
     init()  # Initialize colorama
@@ -281,7 +282,8 @@ Symbolizes that you missed and hit nothing
         5. Typing a coordinate e.g (A, 3) shots the matching tile
         6. The computer and the user alternate turns until a winner is crowned.
         7. The aim of the game is to sink every ship of your opponent.
-        8. And, most importantly, have fun!
+        8. Whenever you want to restart a new game or quit, type "exit".
+        9. And, most importantly, have fun!
         """ + Style.RESET_ALL)
 
     while True:
