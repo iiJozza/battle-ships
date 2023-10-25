@@ -225,7 +225,6 @@ class BattleshipGame:
 
 # Starting page before game start with introduction and rules
 
-
 if __name__ == "__main__":
     from colorama import Fore, Back, Style, init
 
